@@ -6,13 +6,13 @@
   <svg
     id="factory-map"
     width="100%"
-    height="auto"
+    height="100%"
     viewBox="0 0 <%= @width %> <%= @height %>"
     xmlns="http://www.w3.org/2000/svg"
     class="border">
     <!-- Use a placeholder.com image instead of a local asset -->
     <image
-      href='images/maps/satisfactory-map.png'
+      href="<%= asset_path(@background_url) %>"
       x="0"
       y="0"
       width="<%= @width %>"

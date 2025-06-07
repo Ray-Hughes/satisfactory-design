@@ -98,17 +98,17 @@
 
   <!-- Main Canvas Area -->
   <div
-    class="flex-1 bg-white relative overflow-hidden"
+    class="flex-1 h-full bg-white relative overflow-hidden"
     data-controller="planner"
     data-planner-project-id-value="<%= @project.id %>"
     data-planner-project-data-value="<%= @project.data.to_json %>">
     <!-- Background MapComponent -->
-    <div class="absolute inset-0 z-0">
-      <%= render(MapComponent.new(
+    <div class="absolute inset-0 z-0 h-full">
+      <%= render MapComponent.new(
             width: 2000,
             height: 1500,
-            background_url: "world_map.png"
-          )) %>
+            background_url: "maps/satisfactory-map.png"
+          ) %>
     </div>
 
     <!-- SVG Overlay for grid and placed elements -->
