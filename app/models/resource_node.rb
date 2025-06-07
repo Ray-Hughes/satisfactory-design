@@ -1,0 +1,2 @@
+class ResourceNode < ApplicationRecord
+end

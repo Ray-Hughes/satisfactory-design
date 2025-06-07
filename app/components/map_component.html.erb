@@ -1,0 +1,23 @@
+<div
+  data-controller="map"
+  data-map-width-value="<%= @width %>"
+  data-map-height-value="<%= @height %>"
+  data-map-background-url-value="<%= @background_url %>">
+  <svg
+    id="factory-map"
+    width="100%"
+    height="auto"
+    viewBox="0 0 <%= @width %> <%= @height %>"
+    xmlns="http://www.w3.org/2000/svg"
+    class="border">
+    <!-- Use a placeholder.com image instead of a local asset -->
+    <image
+      href='images/maps/satisfactory-map.png'
+      x="0"
+      y="0"
+      width="<%= @width %>"
+      height="<%= @height %>"
+      preserveAspectRatio="xMidYMid slice" />
+    <g id="nodes-layer"></g>
+  </svg>
+</div>

@@ -1,0 +1,27 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold mb-4">Your Factory Projects</h1>
+  <div class="mb-6">
+    <%= link_to "New Project", new_factory_project_path, class: "px-4 py-2 bg-blue-600 text-white rounded-md" %>
+  </div>
+
+  <table class="min-w-full bg-white border">
+    <thead>
+      <tr>
+        <th class="px-4 py-2 border">Title</th>
+        <th class="px-4 py-2 border">Created At</th>
+        <th class="px-4 py-2 border">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border"><%= project.title %></td>
+          <td class="px-4 py-2 border"><%= project.created_at.strftime("%b %-d, %Y") %></td>
+          <td class="px-4 py-2 border">
+            <%= link_to "Edit", edit_factory_project_path(project), class: "text-blue-600 hover:underline" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

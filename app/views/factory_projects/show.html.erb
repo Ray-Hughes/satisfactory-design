@@ -1,0 +1,7 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4"><%= @project.title %> (Read‐Only)</h1>
+  <pre class="bg-gray-100 p-4 rounded"><%= JSON.pretty_generate(@project.data || {}) %></pre>
+  <div class="mt-4">
+    <%= link_to "Back to Projects", factory_projects_path, class: "text-blue-600 hover:underline" %>
+  </div>
+</div>

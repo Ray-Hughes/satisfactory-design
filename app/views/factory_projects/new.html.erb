@@ -1,0 +1,22 @@
+<div class="max-w-lg mx-auto p-6">
+  <h1 class="text-2xl font-bold mb-4">New Factory Project</h1>
+
+  <%= form_with model: @project, local: true do |f| %>
+    <div class="mb-4">
+      <%= f.label :title, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :title, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm" %>
+      <% if @project.errors[:title].any? %>
+        <p class="text-red-500 text-sm"><%= @project.errors[:title].join(", ") %></p>
+      <% end %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :description, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_area :description, rows: 3, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm" %>
+    </div>
+
+    <div class="flex justify-end">
+      <%= f.submit "Create Project", class: "px-4 py-2 bg-green-600 text-white rounded-md" %>
+    </div>
+  <% end %>
+</div>

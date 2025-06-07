@@ -1,0 +1,11 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-4">Interactive Satisfactory Map</h1>
+
+  <div class="max-w-3xl mx-auto w-full">
+    <%= render(MapComponent.new(
+          width: 2000,
+          height: 1500,
+          background_url: "world_map.png"
+        )) %>
+  </div>
+</div>

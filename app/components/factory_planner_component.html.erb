@@ -1,0 +1,130 @@
+<div class="flex h-full">
+  <!-- Sidebar / Tool Palette -->
+  <aside class="w-64 bg-gray-100 p-4 border-r">
+    <h2 class="text-lg font-semibold mb-4">Factory Tools</h2>
+
+    <!-- Existing tool buttons… -->
+    <div data-controller="palette" class="space-y-2 mb-4">
+        <!-- … Add Node, Add Building, etc. … -->
+    </div>
+
+    <!-- 1. World‐Grid Toggle -->
+    <div class="flex items-center mb-4">
+        <input
+        id="world-grid-toggle"
+        type="checkbox"
+        class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+        data-action="change->planner#toggleGrid"
+        <%= @project.data&.dig("grid_on") ? "checked" : "" %> />
+        <label for="world-grid-toggle" class="ml-2 text-sm">World Grid</label>
+    </div>
+
+    <!-- 2. Select Area Button -->
+    <button
+        data-action="click->planner#startAreaSelect"
+        class="w-full mb-4 px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+        Select Factory Area
+    </button>
+
+    <hr class="my-4" />
+
+    <h3 class="text-md font-medium mb-2">Project Info</h3>
+    <p><strong>Title:</strong> <%= @project.title %></p>
+    <p><strong>Description:</strong> <%= @project.description %></p>
+
+    <!-- These appear only after selection is made -->
+    <div
+        data-planner-target="foundationOptions"
+        class="mt-4 space-y-3 hidden">
+        <h4 class="font-semibold">Foundation Size</h4>
+        <div class="flex space-x-2">
+        <button
+            data-action="click->planner#chooseFoundationSize"
+            data-planner-size-value="1"
+            class="px-2 py-1 border rounded text-sm">
+            1 m
+        </button>
+        <button
+            data-action="click->planner#chooseFoundationSize"
+            data-planner-size-value="2"
+            class="px-2 py-1 border rounded text-sm">
+            2 m
+        </button>
+        <button
+            data-action="click->planner#chooseFoundationSize"
+            data-planner-size-value="4"
+            class="px-2 py-1 border rounded text-sm">
+            4 m
+        </button>
+        </div>
+
+        <h4 class="font-semibold">Material</h4>
+        <div class="flex space-x-2">
+        <button
+            data-action="click->planner#chooseMaterial"
+            data-planner-material-value="concrete"
+            class="px-2 py-1 border rounded text-sm">
+            Concrete
+        </button>
+        <button
+            data-action="click->planner#chooseMaterial"
+            data-planner-material-value="metal"
+            class="px-2 py-1 border rounded text-sm">
+            Metal
+        </button>
+        <button
+            data-action="click->planner#chooseMaterial"
+            data-planner-material-value="fiberglass"
+            class="px-2 py-1 border rounded text-sm">
+            Fiberglass
+        </button>
+        <!-- add more as needed -->
+        </div>
+    </div>
+
+    <div class="mt-4 space-x-2">
+        <button
+        data-action="click->planner#saveProject"
+        class="px-4 py-2 bg-blue-600 text-white rounded">
+        Save
+        </button>
+        <button
+        data-action="click->planner#exportJSON"
+        class="px-4 py-2 bg-gray-600 text-white rounded">
+        Export JSON
+        </button>
+    </div>
+    </aside>
+
+  <!-- Main Canvas Area -->
+  <div
+    class="flex-1 bg-white relative overflow-hidden"
+    data-controller="planner"
+    data-planner-project-id-value="<%= @project.id %>"
+    data-planner-project-data-value="<%= @project.data.to_json %>">
+    <!-- Background MapComponent -->
+    <div class="absolute inset-0 z-0">
+      <%= render(MapComponent.new(
+            width: 2000,
+            height: 1500,
+            background_url: "world_map.png"
+          )) %>
+    </div>
+
+    <!-- SVG Overlay for grid and placed elements -->
+    <svg
+      id="factory-overlay"
+      class="absolute inset-0 w-full h-full"
+      viewBox="0 0 2000 1500"
+      xmlns="http://www.w3.org/2000/svg">
+      <% (0..20).each do |i| %>
+        <line x1="<%= i * 100 %>" y1="0" x2="<%= i * 100 %>" y2="1500" stroke="#e5e7eb" stroke-width="0.5" />
+      <% end %>
+      <% (0..15).each do |j| %>
+        <line x1="0" y1="<%= j * 100 %>" x2="2000" y2="<%= j * 100 %>" stroke="#e5e7eb" stroke-width="0.5" />
+      <% end %>
+
+      <g id="layout-layer"></g>
+    </svg>
+  </div>
+</div>
