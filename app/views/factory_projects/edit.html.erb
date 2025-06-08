@@ -1,3 +1,7 @@
 <div class="h-screen">
-  <%= render(FactoryPlannerComponent.new(project: @project)) %>
+  <%= render(
+    FactoryPlannerComponent.new(
+      project: @project,
+      background_url: "maps/satisfactory-map.png"
+    )) %>
 </div>

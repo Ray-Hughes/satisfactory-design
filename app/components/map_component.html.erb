@@ -10,14 +10,13 @@
     viewBox="0 0 <%= @width %> <%= @height %>"
     xmlns="http://www.w3.org/2000/svg"
     class="border">
-    <!-- Use a placeholder.com image instead of a local asset -->
     <image
       href="<%= asset_path(@background_url) %>"
       x="0"
       y="0"
       width="<%= @width %>"
       height="<%= @height %>"
-      preserveAspectRatio="xMidYMid slice" />
+      preserveAspectRatio="xMinYMin meet" />
     <g id="nodes-layer"></g>
   </svg>
 </div>
