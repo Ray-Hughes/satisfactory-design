@@ -1,4 +1,8 @@
-<div class="flex h-full">
+<div
+  class="flex h-full"
+  data-controller="planner"
+  data-planner-project-id-value="<%= @project.id %>"
+  data-planner-project-data-value="<%= @project.data.to_json %>">
   <!-- Sidebar / Tool Palette -->
   <aside class="w-64 bg-gray-100 p-4 border-r">
     <h2 class="text-lg font-semibold mb-4">Factory Tools</h2>
@@ -21,9 +25,9 @@
 
     <!-- Select Area Button -->
     <button
-      data-action="click->planner#startAreaSelect"
-      class="w-full mb-4 px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-      Select Factory Area
+        data-action="click->planner#toggleAreaSelect"
+        class="w-full mb-4 px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+        <span data-planner-target="areaButtonLabel">Select Factory Area</span>
     </button>
 
     <hr class="my-4" />
@@ -102,15 +106,10 @@
       class="absolute inset-0 w-full h-full"
       viewBox="0 0 2000 1500"
       xmlns="http://www.w3.org/2000/svg"
-      data-controller="planner"
       data-action="
-        click->planner.onCanvasClick
-        mousedown->planner.beginDrag
-        mousemove->planner.updateDrag
-        mouseup->planner.endDrag
-      "
-      data-planner-project-id-value="<%= @project.id %>"
-      data-planner-project-data-value="<%= @project.data.to_json %>">
+        click->planner#onCanvasClick
+        mousedown->planner#beginDrag
+      ">
 
       <!-- Background -->
       <image
